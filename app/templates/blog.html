@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% load static %}
+<script src="{% static 'raphael-2.1.4.min.js'%}"></script>
+<script src="{% static 'justgage.js'%}"></script>
+
+
+<script src="{% static 'loading-bar.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'loading-bar.css'%}"/>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+
+    <div class="container">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="nav-link disabled" href="index">Le classement</a>
+                <a class="nav-link disabled" href="blog">Notre blog</a>
+          </nav>
+    </div>
+
+    <div class="jumbotron text-center">
+      <h1>Bienvenue sur notre Blog</h1>
+      <p>Vous pourrez y trouver des articles documentés sur la transition énergetique</p>
+    </div>
+
+     <div class="index-content">
+        <div class="container">
+            <div class="card-columns">
+                <a href="blog-detail">
+                        <div class="card">
+                            <img src="https://images.pexels.com/photos/690598/pexels-photo-690598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                            <h4>Ils se réunissent et font quelque chose d’incroyable, vous ne devinerez jamais la fin !</h4>
+                            <p>LAujourd’hui l’histoire de ces personnes va vous impressionner. Ces gens se sont réunis et ont décidé de créer quelque chose d’extraordinaire, ensemble. En effet, les données que nous vous proposons aujourd’hui montre l’histoire de ces parcs photovoltaïque citoyens que l’ont voit fleurir un peu partout en France.</p>
+                            <a href="blog-detail" class="blue-button">Read More</a>
+                        </div>
+                </a>
+                <a href="blog-detail">
+                        <div class="card">
+                            <img src="https://images.pexels.com/photos/687854/pexels-photo-687854.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                            <h4>Découvrez les villes qui ont la plus grosse de France !</h4>
+                            <p>Aujourd’hui découvrez les villes ont la plus grosse… Production d’énergies renouvelables en France !
+(Indicateur = production totale brute)</p>
+                            <a href="blog-detail" class="blue-button">Read More</a>
+                        </div>
+                </a>
+                <a href="blog-detail">
+                        <div class="card">
+                            <img src="https://images.pexels.com/photos/159397/solar-panel-array-power-sun-electricity-159397.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+                            <h4>Un nouveau gisement hyper rentable est découvert dans cette ville !</h4>
+                            <p>Aujourd’hui les nouvelles richesses de ces villes vont vous impressionner… Pas dans leur sous-sol (on n’a pas de pétrole mais on a des idées) mais au plus près de nous : découvrez le classement des villes avec le plus gros potentiel en énergie renouvelable de France !
+(Indicateur = Potentiel en énergie renouvelable (cadastre solaire, etc.))</p>
+                            <a href="blog-detail" class="blue-button">Read More</a>
+                        </div>
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>

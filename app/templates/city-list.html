@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<style>
+    .jumbotron {
+      background-image: url("https://images.pexels.com/photos/411592/pexels-photo-411592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+      background-size: cover;
+    }
+</style>
+
+{% load static %}
+<script src="{% static 'loading-bar.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'loading-bar.css'%}"/>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Qui a la plus grosse ?</title>
+</head>
+<body>
+
+
+    <div class="container">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="nav-link disabled" href="#">Le classement</a>
+                <a class="nav-link disabled" href="blog">Notre blog</a>
+          </nav>
+    </div>
+
+     <div class="jumbotron text-center">
+      <h1>Qui a la plus grosse ?</h1>
+      <p>Top des villes les plus productrices d'énergies renouvenables</p>
+    </div>
+
+
+    <div class="container">
+	<div class="row">
+	    <div class="container">
+            <blockquote class="quote-card green-card">
+              <p>
+                  Ce sont les habitants de <b>{{ win}}</b> qui ont la plus grosse production d'énergie renouvelable !
+              </p>
+
+              <cite>
+                D'après qui a la plus grosse ?
+              </cite>
+            </blockquote>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+
+    <div class="row" style="font-color:grey">
+        <div class="col-2">
+              <p>Classement</p>
+        </div>
+
+        <div class="col-3">
+            <p>Ville</p>
+        </div>
+        <div class="col-1">
+          <p>Note</p>
+        </div>
+
+        <div class="col-lg-4">
+            <p>Sa puissance ... ENR</p>
+        </div>
+    </div>
+
+
+
+
+
+        {% for city_info in data %}
+
+      <div class="row">
+
+        {% if city_info.rang < 4 %}
+
+            <div class="col-2">
+            {% if 1 == city_info.rang %}
+                <img   style="width: 40px" src="{% static "crowns.png" %}" alt="King" />
+                {% else %}
+                <p>{{ city_info.rang}}</p>
+            {% endif %}
+        </div>
+
+        <div class="col-3">
+            <p style="font-size: 25px; font-weight: 900">{{ city_info.nom_commune}}</p>
+        </div>
+        <div class="col-1">
+          <p  style="font-size: 25px; font-weight: 900">{{ city_info.note}}</p>
+        </div>
+
+        <div class="col-4">
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar" aria-valuenow={{ city_info.note}}
+              aria-valuemin="0" aria-valuemax="100" style="width:{{ city_info.note}}%">
+              </div>
+            </div>
+        </div>
+
+      <div class="col-2">
+            <form method="post" action="city-detail/">
+                     {% csrf_token %}
+                <input id="nom_commune" name="nom_commune" type="hidden" value={{ city_info.nom_commune}}>
+                <input id="total_prod" name="total_prod" type="hidden" value={{ city_info.total_prod}}>
+                <input id="prod_eolien" name="prod_eolien" type="hidden" value={{ city_info.prod_eolien}}>
+                <input id="prod_hydraulique" name="prod_hydraulique" type="hidden" value={{ city_info.prod_hydraulique}}>
+                <input id="prod_photovoltaique" name="prod_photovoltaique" type="hidden" value={{ city_info.prod_photovoltaique}}>
+                <input id="prod_autre" name="prod_autre" type="hidden" value={{ city_info.prod_autre}}>
+                <input id="prod_bioenergie" name="prod_bioenergie" type="hidden" value={{ city_info.prod_bioenergie}}>
+                <input id="prod_indiv" name="prod_indiv" type="hidden" value={{ city_info.prod_indiv}}>
+                <input id="note" name="note" type="hidden" value={{ city_info.note}}>
+                <input id="population" name="population" type="hidden" value={{ city_info.population}}>
+                <input id="prod_cogénération" name="prod_cogénération" type="hidden" value={{city_info.prod_cogénération}}>
+                <input type="submit" value="Voir plus" class="btn btn-light"/>
+                </form>
+
+          </div>
+
+
+
+      {% elif city_info.rang > 3 and  city_info.rang < 11 %}
+
+
+        <div class="col-2">
+                <p>{{ city_info.rang}}</p>
+        </div>
+
+        <div class="col-3">
+            <p>{{ city_info.nom_commune}}</p>
+        </div>
+        <div class="col-1">
+          <b>{{ city_info.note}}</b>
+        </div>
+
+        <div class="col-4">
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar" aria-valuenow={{ city_info.note}}
+              aria-valuemin="0" aria-valuemax="100" style="width:{{ city_info.note}}%">
+              </div>
+            </div>
+        </div>
+
+      <div class="col-2">
+            <form method="post" action="city-detail/">
+                     {% csrf_token %}
+                <input id="nom_commune" name="nom_commune" type="hidden" value={{ city_info.nom_commune}}>
+                <input id="total_prod" name="total_prod" type="hidden" value={{ city_info.total_prod}}>
+                <input id="prod_eolien" name="prod_eolien" type="hidden" value={{ city_info.prod_eolien}}>
+                <input id="prod_hydraulique" name="prod_hydraulique" type="hidden" value={{ city_info.prod_hydraulique}}>
+                <input id="prod_photovoltaique" name="prod_photovoltaique" type="hidden" value={{ city_info.prod_photovoltaique}}>
+                <input id="prod_autre" name="prod_autre" type="hidden" value={{ city_info.prod_autre}}>
+                <input id="prod_bioenergie" name="prod_bioenergie" type="hidden" value={{ city_info.prod_bioenergie}}>
+                <input id="prod_indiv" name="prod_indiv" type="hidden" value={{ city_info.prod_indiv}}>
+                <input id="note" name="note" type="hidden" value={{ city_info.note}}>
+                <input id="population" name="population" type="hidden" value={{ city_info.population}}>
+                <input id="prod_cogénération" name="prod_cogénération" type="hidden" value={{city_info.prod_cogénération}}>
+                <input type="submit" value="Voir plus" class="btn btn-light"/>
+                </form>
+
+          </div>
+
+            {% else %}
+
+
+        <div class="col-2">
+                <p>{{ city_info.rang}}</p>
+        </div>
+
+        <div class="col-3">
+            <p style="font-size: 12px; font-weight: 200">{{ city_info.nom_commune}}</p>
+        </div>
+        <div class="col-1">
+          <b>{{ city_info.note}}</b>
+        </div>
+
+        <div class="col-4">
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar" aria-valuenow={{ city_info.note}}
+              aria-valuemin="0" aria-valuemax="100" style="width:{{ city_info.note}}%">
+              </div>
+            </div>
+        </div>
+
+      <div class="col-2">
+            <form method="post" action="city-detail/">
+                     {% csrf_token %}
+                <input id="nom_commune" name="nom_commune" type="hidden" value={{ city_info.nom_commune}}>
+                <input id="total_prod" name="total_prod" type="hidden" value={{ city_info.total_prod}}>
+                <input id="prod_eolien" name="prod_eolien" type="hidden" value={{ city_info.prod_eolien}}>
+                <input id="prod_hydraulique" name="prod_hydraulique" type="hidden" value={{ city_info.prod_hydraulique}}>
+                <input id="prod_photovoltaique" name="prod_photovoltaique" type="hidden" value={{ city_info.prod_photovoltaique}}>
+                <input id="prod_autre" name="prod_autre" type="hidden" value={{ city_info.prod_autre}}>
+                <input id="prod_bioenergie" name="prod_bioenergie" type="hidden" value={{ city_info.prod_bioenergie}}>
+                <input id="prod_indiv" name="prod_indiv" type="hidden" value={{ city_info.prod_indiv}}>
+                <input id="note" name="note" type="hidden" value={{ city_info.note}}>
+                <input id="population" name="population" type="hidden" value={{ city_info.population}}>
+                <input id="prod_cogénération" name="prod_cogénération" type="hidden" value={{city_info.prod_cogénération}}>
+                <input type="submit" value="Voir plus" class="btn btn-light"/>
+                </form>
+
+          </div>
+
+
+        {% endif %}
+
+
+      </div>
+    {% endfor %}
+    </div>
+</body>
+</html>

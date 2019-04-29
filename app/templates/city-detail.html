@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% load static %}
+<script src="{% static 'raphael-2.1.4.min.js'%}"></script>
+<script src="{% static 'justgage.js'%}"></script>
+
+
+<script src="{% static 'loading-bar.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'loading-bar.css'%}"/>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ma ville : {{ data.nom_commune }}</title>
+</head>
+<body>
+
+    <div class="container">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="nav-link disabled" href="../index">Le classement</a>
+                <a class="nav-link disabled" href="../blog">Notre blog</a>
+          </nav>
+    </div>
+
+     <div class="jumbotron text-center">
+      <h1 class="mt-2">Ma ville : {{ data.nom_commune }}</h1>
+    </div>
+
+     <div class="container">
+         <div class="row" >
+            <h3>Tableau de bord</h3>
+        </div>
+
+         <div class="row" style="margin-top: 40px">
+             <div class="card-deck col-12">
+                 <div class="col-md-3">
+                     <div class="card ">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ data.population }}</h5>
+                      <p class="card-text">Habitants</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                 </div>
+
+                 <div class="col-md-3">
+                     <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ data.prod_indiv }} MW/H</h5>
+                      <p class="card-text">Production ENR/ habitant</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                 </div>
+
+                 <div class="col-md-3">
+                     <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ data.total_prod|floatformat:"0" }} MW/H</h5>
+                      <p class="card-text">Production ENR</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                 </div>
+
+                 <div class="col-md-3">
+                     <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ data.note }} / 100</h5>
+                      <p class="card-text">Note ENR</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                 </div>
+            </div>
+        </div>
+
+        <div class="row align-center"  style="margin-top: 30px">
+            <h3 class="mt-2">Production ENR installée</h3>
+        </div>
+         <div class="row">
+
+            <div id="photovoltaique" class="col-md-4"></div>
+
+            <div id="eolien" class="col-md-4"></div>
+
+            <div id="bio" class="col-md-4">
+
+            </div>
+
+        </div>
+
+         <div class="row">
+             <a  href="../citizen-projects" style="margin-left: 450px;margin-top: 50px">
+                 <img   class="align-center img-responsive center-block"src="{% static "power.png" %}" alt="Power"  href="../citizen-projects">
+             </a>
+
+             </div>
+      </div>
+    </div>
+  </body>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+    var photovoltaique = new JustGage({
+        id: "photovoltaique",
+        title: "Photovoltaique",
+        value: {{ data.prod_photovoltaique }},
+        min: 0,
+        max: {{ data.total_prod }}
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    var eolien = new JustGage({
+        id: "eolien",
+        value: {{ data.prod_eolien }},
+        min: 0,
+        max: {{ data.total_prod }},
+        title: "Eolien",
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    var bio = new JustGage({
+        id: "bio",
+        value: {{ data.prod_bioenergie }},
+        min: 0,
+        max: {{ data.total_prod }},
+        title: "Bioénergie",
+    });
+});
+
+</script>
+
+
+  <script src="{% static 'raphael-2.1.4.min.js'%}"></script>
+  <script src="{% static 'justgage.js'%}"></script>
+
+
+</body>
+</html>

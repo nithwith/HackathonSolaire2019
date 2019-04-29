@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% load static %}
+<script src="{% static 'raphael-2.1.4.min.js'%}"></script>
+<script src="{% static 'justgage.js'%}"></script>
+
+
+<script src="{% static 'loading-bar.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'loading-bar.css'%}"/>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projets citoyens autour de chez vous</title>
+</head>
+<body>
+
+    <div class="container">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="nav-link disabled" href="index">Le classement</a>
+                <a class="nav-link disabled" href="blog">Notre blog</a>
+          </nav>
+    </div>
+
+     <div class="jumbotron text-center">
+      <h1 class="mt-2">Projets citoyens autour de chez vous</h1>
+    </div>
+
+     <div class="container">
+         <div class="row">
+             <img src="{% static "carte.jpg" %}" style="margin-top: 40px"alt="Carte">
+
+        </div>
+      </div>
+    </div>
+
+
+</body>
+</html>

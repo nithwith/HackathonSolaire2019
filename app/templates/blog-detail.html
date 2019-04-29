@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<style>
+    .jumbotron {
+      background-image: url("https://images.pexels.com/photos/411592/pexels-photo-411592.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+      background-size: cover;
+    }
+</style>
+
+{% load static %}
+<script src="{% static 'loading-bar.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'loading-bar.css'%}"/>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Qui a la plus grosse ?</title>
+</head>
+<body>
+
+
+    <div class="container">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="nav-link disabled" href="index">Le classement</a>
+                <a class="nav-link disabled" href="blog">Notre blog</a>
+          </nav>
+    </div>
+
+     <div class="jumbotron text-center">
+      <h1>Top 10 des villes les plus vertes, la 9 eme va vous surprendre !</h1>
+      <p>Top des villes les plus respecteuse de notre belle planette</p>
+    </div>
+
+    <div class="container">
+    <div class="container">
+
+        <div class="row">
+            <h2>Un découverte surprenante</h2>
+            <p>Aujourd’hui   nous   vous   proposons   un   article   sur   la   production   d’énergies
+            renouvelables   par   personne   dans   les   villes   de   Loire-Atlantique.   Et   sans   plus
+            attendre, le classement
+            !</p>
+        </div>
+
+        {% for city_info in data %}
+      <div class="row">
+        <div class="col-lg-2">
+          <p>{{ city_info.rang}}</p>
+        </div>
+
+        <div class="col-lg-4">
+            <p><a href="city/{{ city_info.code_commune}}">{{ city_info.nom_commune}}</a></p>
+        </div>
+
+        <div class="col-lg-2">
+          <p>{{ city_info.note}}</p>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar" aria-valuenow={{ city_info.note}}
+              aria-valuemin="0" aria-valuemax="100" style="width:{{ city_info.note}}%">
+              </div>
+            </div>
+        </div>
+      </div>
+    {% endfor %}
+
+
+    <div class="row">
+            <h2>Plongeons dans les data</h2>
+            <p>Ici   nous   avons   pondéré   la   production   d’énergie   renouvelable   par   la   population
+            des villes de Loire-Atlantique, aidant ainsi les villes avec des populations faibles
+            et   des   grosses   installations   renouvelables.   On   voit   cependant   une   différence
+            entre ces villes car les deux premières (Petit-Auverné et Soulvache) ont plutôt de
+            fortes productions éoliennes et de très petites populations tandis que la troisième
+            (Issé) possède également une forte production de bioénergie.
+            Pour créer ce classement nous avons utilisé les données mises à disposition par
+            ENEDIS, le gestionnaire du réseau de distribution d’électricité français ainsi que
+            les données gouvernementales de population disponible sur API Géo, un site de
+            data gouvernementale. Ces données sont accessibles à tous en Open Data.</p>
+    </div>
+    <div class="row">
+        <h2>Données utilisés</h2>
+    </div>
+    <div  class="row">
+        <ul class="list-unstyled">
+         <li><p><a href="#">Open Data ENEDIS </a></p></li>
+         <li><p><a href="#">API gouvernement </a></p></li>
+         <li><p><a href="#">API Utilisé via Grappe.io </a></p></li>
+        </ul>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
